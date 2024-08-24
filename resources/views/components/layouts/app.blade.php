@@ -9,9 +9,12 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body>
+<body class="bg-[#F2F2F2] dark:bg-[#453F3C]">
 {{ $slot }}
 @vite('resources/js/app.js')
 @livewireScripts
+<div class="absolute b-0 w-full text-center text-gray-500 text-sm">
+    Developed by: <a href="https://achyut.com.np" class="text-blue-500">Achyut</a>
+</div>
 </body>
 </html>
