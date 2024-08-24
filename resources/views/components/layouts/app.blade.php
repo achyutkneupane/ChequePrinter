@@ -14,7 +14,7 @@
 @vite('resources/js/app.js')
 @livewireScripts
 <div class="absolute b-0 w-full text-center text-gray-500 text-sm">
-    Developed by: <a href="https://achyut.com.np" class="text-blue-500">Achyut</a>
+    Developed by: <a href="https://achyut.com.np" class="text-blue-500" target="_blank">Achyut</a>
 </div>
 </body>
 </html>

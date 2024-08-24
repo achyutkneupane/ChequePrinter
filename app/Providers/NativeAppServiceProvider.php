@@ -15,8 +15,9 @@ class NativeAppServiceProvider implements ProvidesPhpIni
     {
         Window::open('cheque')
             ->width(600)
-            ->height(380)
+            ->height(450)
             ->resizable(false)
+            ->darkVibrancy()
             ->position(100, 100);
     }
 
