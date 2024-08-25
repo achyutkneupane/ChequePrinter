@@ -13,7 +13,6 @@
             overflow: hidden;
             width: 190.5mm;
             height: 88.9mm;
-            background-color: #3f3f3f;
             font-size: 16px;
         }
 

@@ -50,8 +50,12 @@
             @enderror
         </div>
 
-        <div class="col-span-6 mt-2">
+        <div class="col-span-3 mt-2">
             <input type="submit" value="Submit" class="bg-[#EA9010] text-white text-sm font-medium rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer dark:bg-[#EA9010] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        </div>
+
+        <div class="col-span-3 mt-2">
+            <input type="button" value="Save PDF" class="bg-[#EA9010] text-white text-sm font-medium rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer dark:bg-[#EA9010] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" wire:click="savePDF" />
         </div>
     </div>
 </form>
