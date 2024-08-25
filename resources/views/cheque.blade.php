@@ -81,17 +81,12 @@
 </head>
 <body>
 @php
-    $date = "2010-06-09";
-    $payee = "Achyut Neupane";
-    $amount_num = 12345678901.45;
     $converter = new \MilanTarami\NumberToWordsConverter\Services\NumberToWords();
     $amount_array = $converter->get($amount_num, [
         'response_type' => 'array'
     ]);
     $amount = "NPR " . $amount_array['formatted_input'];
     $amount_words = $amount_array['in_words'];
-
-    $show_crossing = false;
 
     $date = str_split(date_create($date)->format('dmY'));
 @endphp

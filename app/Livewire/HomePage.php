@@ -49,7 +49,12 @@ class HomePage extends Component
     {
         $this->validate();
 
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque');
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque', [
+            'amount_num' => $this->amount,
+            'payee' => $this->payee,
+            'show_crossing' => $this->crossing === "cross",
+            'date' => $this->date
+        ]);
 
         $output = $pdf->getDomPDF()->getDom()->saveXML();
 
@@ -64,7 +69,12 @@ class HomePage extends Component
     {
         $this->validate();
 
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque');
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque', [
+            'amount_num' => $this->amount,
+            'payee' => $this->payee,
+            'show_crossing' => $this->crossing === "cross",
+            'date' => $this->date
+        ]);
 
         $uuid = \Ramsey\Uuid\Uuid::uuid4();
 
