@@ -65,6 +65,17 @@ class HomePage extends Component
         \Native\Laravel\Facades\System::print($output, $printer);
     }
 
+    public function setPrinter($printer) : void
+    {
+        $printers = \Native\Laravel\Facades\System::printers();
+        $printer = collect($printers)->where('name', $printer)->first();
+
+        $this->printer = $printer;
+        $this->printerName = $printer->name;
+        $this->printerDisplayName = $printer->displayName;
+
+    }
+
     public function savePDF() : void
     {
         $this->validate();
