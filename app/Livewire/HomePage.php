@@ -2,15 +2,36 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Validate;
 use Native\Laravel\DataObjects\Printer;
 
 class HomePage extends Component
 {
-    public $bank = "", $amount, $payee, $crossing = "", $date;
+    #[Validate('required', message: "Select one of the banks")]
+    #[Validate('string', message: "Bank must be a string")]
+    public string $bank = "";
 
-    public string $family, $printerName, $printerDisplayName;
+    #[Validate('required', message: "Enter the amount")]
+    #[Validate('numeric', message: "Amount must be a number")]
+    public float $amount;
+
+    #[Validate('required', message: "Enter the payee name")]
+    #[Validate('string', message: "Payee name must be a string")]
+    #[Validate('max:255', message: "Payee name must be less than 255 characters")]
+    public string $payee;
+
+    #[Validate('required', message: "Select one of the crossings")]
+    public string $crossing = "";
+
+    #[Validate('required', message: "Enter the date")]
+    #[Validate('date', message: "Date must be a valid date")]
+    public string $date;
+
+    public string $family;
+    public string $printerName;
+    public string $printerDisplayName;
     public array|string $printers = [];
     public Printer|string|null $printer = null;
 
@@ -26,23 +47,7 @@ class HomePage extends Component
 
     public function printCheque() : void
     {
-//        $this->validate([
-//            'bank' => 'required',
-//            'amount' => ['required', 'numeric'],
-//            'payee' => ['required', 'string', 'max:255'],
-//            'crossing' => ['required'],
-//            'date' => ['required', 'date'],
-//        ], [
-//            'bank.required' => "Select one of the banks",
-//            'amount.required' => "Enter the amount",
-//            'amount.numeric' => "Amount must be a number",
-//            'payee.required' => "Enter the payee name",
-//            'payee.string' => "Payee name must be a string",
-//            'payee.max' => "Payee name must be less than 255 characters",
-//            'crossing.required' => "Select one of the crossings",
-//            'date.required' => "Enter the date",
-//            'date.date' => "Date must be a valid date",
-//        ]);
+        $this->validate();
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque');
 
@@ -57,23 +62,7 @@ class HomePage extends Component
 
     public function savePDF() : void
     {
-        $this->validate([
-            'bank' => 'required',
-            'amount' => ['required', 'numeric'],
-            'payee' => ['required', 'string', 'max:255'],
-            'crossing' => ['required'],
-            'date' => ['required', 'date'],
-        ], [
-            'bank.required' => "Select one of the banks",
-            'amount.required' => "Enter the amount",
-            'amount.numeric' => "Amount must be a number",
-            'payee.required' => "Enter the payee name",
-            'payee.string' => "Payee name must be a string",
-            'payee.max' => "Payee name must be less than 255 characters",
-            'crossing.required' => "Select one of the crossings",
-            'date.required' => "Enter the date",
-            'date.date' => "Date must be a valid date",
-        ]);
+        $this->validate();
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque');
 
