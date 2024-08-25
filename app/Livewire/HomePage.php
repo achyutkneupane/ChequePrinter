@@ -4,20 +4,27 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Native\Laravel\DataObjects\Printer;
 
 class HomePage extends Component
 {
     public $bank = "", $amount, $payee, $crossing = "", $date;
 
-    public $family;
+    public string $family;
+    public array|string $printers = [];
+    public Printer|string|null $printer = null;
 
-    public function mount()
+    public function mount() : void
     {
-        $system = new \Native\Laravel\Facades\System();
-        $family = PHP_OS_FAMILY;
+        $this->family = PHP_OS_FAMILY;
+        $this->printers = \Native\Laravel\Facades\System::printers();
+        $this->printer = collect($this->printers)->where('isDefault', true)->first();
+
+        $this->printers = json_encode($this->printers);
+        $this->printer = json_encode($this->printer);
     }
 
-    public function printCheque()
+    public function printCheque() : void
     {
 //        $this->validate([
 //            'bank' => 'required',
@@ -48,25 +55,25 @@ class HomePage extends Component
         Storage::disk('desktop')->put("cheques/" . $file_name, $pdf->output());
     }
 
-    public function savePDF()
+    public function savePDF() : void
     {
-//        $this->validate([
-//            'bank' => 'required',
-//            'amount' => ['required', 'numeric'],
-//            'payee' => ['required', 'string', 'max:255'],
-//            'crossing' => ['required'],
-//            'date' => ['required', 'date'],
-//        ], [
-//            'bank.required' => "Select one of the banks",
-//            'amount.required' => "Enter the amount",
-//            'amount.numeric' => "Amount must be a number",
-//            'payee.required' => "Enter the payee name",
-//            'payee.string' => "Payee name must be a string",
-//            'payee.max' => "Payee name must be less than 255 characters",
-//            'crossing.required' => "Select one of the crossings",
-//            'date.required' => "Enter the date",
-//            'date.date' => "Date must be a valid date",
-//        ]);
+        $this->validate([
+            'bank' => 'required',
+            'amount' => ['required', 'numeric'],
+            'payee' => ['required', 'string', 'max:255'],
+            'crossing' => ['required'],
+            'date' => ['required', 'date'],
+        ], [
+            'bank.required' => "Select one of the banks",
+            'amount.required' => "Enter the amount",
+            'amount.numeric' => "Amount must be a number",
+            'payee.required' => "Enter the payee name",
+            'payee.string' => "Payee name must be a string",
+            'payee.max' => "Payee name must be less than 255 characters",
+            'crossing.required' => "Select one of the crossings",
+            'date.required' => "Enter the date",
+            'date.date' => "Date must be a valid date",
+        ]);
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque');
 
@@ -95,7 +102,7 @@ class HomePage extends Component
         }
     }
 
-    public function render()
+    public function render() : \Illuminate\View\View
     {
         return view('livewire.home-page');
     }
