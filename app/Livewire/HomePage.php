@@ -8,6 +8,15 @@ use Livewire\Component;
 class HomePage extends Component
 {
     public $bank = "", $amount, $payee, $crossing = "", $date;
+
+    public $family;
+
+    public function mount()
+    {
+        $system = new \Native\Laravel\Facades\System();
+        $family = PHP_OS_FAMILY;
+    }
+
     public function printCheque()
     {
 //        $this->validate([
@@ -68,6 +77,22 @@ class HomePage extends Component
         $file_name = $payee ? $payee . '/' . $uuid . '.pdf' : $uuid . '.pdf';
 
         Storage::disk('desktop')->put("cheques/" . $file_name, $pdf->output());
+
+//        open file
+
+        if ($this->family === "Windows") {
+            $file = Storage::disk('desktop')->path("cheques/" . $file_name);
+
+            exec("start " . $file);
+        } else if ($this->family === "Darwin") {
+            $file = Storage::disk('desktop')->path("cheques/" . $file_name);
+
+            exec("open " . $file);
+        } else if ($this->family === "Linux") {
+            $file = Storage::disk('desktop')->path("cheques/" . $file_name);
+
+            exec("xdg-open " . $file);
+        }
     }
 
     public function render()
