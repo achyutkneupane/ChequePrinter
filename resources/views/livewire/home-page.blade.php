@@ -42,11 +42,8 @@
             <label for="crossing" class="select-none block mb-2 text-sm font-medium text-[#453F3C] dark:text-white">Crossing</label>
             <select id="crossing" class="bg-white border border-gray-300 text-[#453F3C] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" wire:model="crossing">
                 <option disabled value="">Choose a crossing</option>
-                <option value="one">Cross A/C Payee + Or Bearer</option>
-                <option value="two">Cross A/C Payee + Not Negotiable + Or Bearer</option>
-                <option value="three">Cross A/C Payee</option>
-                <option value="four">Cross Only</option>
-                <option value="five">No Crossing</option>
+                <option value="cross">Cross A/C Payee</option>
+                <option value="no-cross">No Crossing</option>
             </select>
             @error('crossing')
             <span class="text-red-500 text-sm">{{ $message }}</span>

@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class HomePage extends Component
 {
-    public $bank = "", $amount, $payee, $crossing, $date;
+    public $bank = "", $amount, $payee, $crossing = "", $date;
     public function printCheque()
     {
         $this->validate([
@@ -27,13 +27,7 @@ class HomePage extends Component
             'date.date' => "Date must be a valid date",
         ]);
 
-        $this->emit('printCheque', [
-            'bank' => $this->bank,
-            'amount' => $this->amount,
-            'payee' => $this->payee,
-            'crossing' => $this->crossing,
-            'date' => $this->date,
-        ]);
+        dd($this->bank, $this->amount, $this->payee, $this->crossing, $this->date);
     }
     public function render()
     {
