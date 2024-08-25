@@ -21,16 +21,10 @@
             position: relative;
             width: 190.5mm;
             height: 88.9mm;
-            color: white;
-            background-image: url('https://s8.freechequewriter.com/image/cheque/KumariBank_NP.jpg');
-            background-color: blue;
-            background-repeat: no-repeat;
-            background-blend-mode: multiply;
-            background-size: cover;
         }
 
-        .date, .payee, .amount, .amount-words, .or-bearer-one, .or-bearer-two {
-            color: red;
+        .date, .payee, .amount, .amount-words, .or-bearer-one, .or-bearer-two, .crossing {
+            color: black;
             position: absolute;
         }
 
@@ -68,16 +62,37 @@
             right: 66.675mm;
             line-height: 1.6;
         }
+
+        .crossing {
+            position: absolute;
+            top: 8mm;
+            left: -18mm;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            line-height: 1.5;
+            padding: 2px 75px;
+            transform: rotate(-35deg);
+            transform-origin: center center;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 @php
     $date = "2010-06-09";
     $payee = "Achyut Neupane";
-    $amount_num = 100000000;
-    $amount = \Illuminate\Support\Number::currency($amount_num, 'NPR');
+    $amount_num = 12345678901.45;
     $converter = new \MilanTarami\NumberToWordsConverter\Services\NumberToWords();
-    $amount_words = $converter->get($amount_num);
+    $amount_array = $converter->get($amount_num, [
+        'response_type' => 'array'
+    ]);
+    $amount = "NPR " . $amount_array['formatted_input'];
+    $amount_words = $amount_array['in_words'];
+
+    $show_crossing = false;
 
     $date = str_split(date_create($date)->format('dmY'));
 @endphp
@@ -132,6 +147,17 @@
             </tr>
         </table>
     </div>
+    @if($show_crossing)
+        <div class="crossing">
+            <table>
+                <tr>
+                    <td>
+                        A/C Payee Only
+                    </td>
+                </tr>
+            </table>
+        </div>
+    @endif
 </div>
 </body>
 </html>

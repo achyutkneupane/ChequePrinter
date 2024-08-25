@@ -11,13 +11,15 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "milantarami/number-to-words": "^1.0",
-        "nativephp/electron": "^0.7.0"
+        "nativephp/electron": "^0.7.0",
+        "symfony/polyfill-iconv": "^1.30"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
+        "nativephp/php-bin": "^0.4.0",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.35",
         "pestphp/pest-plugin-laravel": "^2.4"
