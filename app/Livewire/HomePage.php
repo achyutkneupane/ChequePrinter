@@ -10,7 +10,7 @@ class HomePage extends Component
 {
     public $bank = "", $amount, $payee, $crossing = "", $date;
 
-    public string $family;
+    public string $family, $printerName, $printerDisplayName;
     public array|string $printers = [];
     public Printer|string|null $printer = null;
 
@@ -20,8 +20,8 @@ class HomePage extends Component
         $this->printers = \Native\Laravel\Facades\System::printers();
         $this->printer = collect($this->printers)->where('isDefault', true)->first();
 
-        $this->printers = json_encode($this->printers);
-        $this->printer = json_encode($this->printer);
+        $this->printerName = $this->printer ? $this->printer->name : "";
+        $this->printerDisplayName = $this->printer ? $this->printer->displayName : "";
     }
 
     public function printCheque() : void
@@ -46,13 +46,13 @@ class HomePage extends Component
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('cheque');
 
-        $uuid = \Ramsey\Uuid\Uuid::uuid4();
+        $output = $pdf->getDomPDF()->getDom()->saveXML();
 
-        $payee = $this->payee;
+        $printers = \Native\Laravel\Facades\System::printers();
 
-        $file_name = $payee ? $payee . '/' . $uuid . '.pdf' : $uuid . '.pdf';
+        $printer = collect($printers)->where('name', $this->printerName)->first();
 
-        Storage::disk('desktop')->put("cheques/" . $file_name, $pdf->output());
+        \Native\Laravel\Facades\System::print($output, $printer);
     }
 
     public function savePDF() : void
@@ -104,6 +104,8 @@ class HomePage extends Component
 
     public function render() : \Illuminate\View\View
     {
+        $this->printers = json_encode($this->printers);
+        $this->printer = json_encode($this->printer);
         return view('livewire.home-page');
     }
 }

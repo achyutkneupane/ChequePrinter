@@ -52,7 +52,7 @@
 
         <div class="col-span-3 mt-2">
             <input type="submit" value="Submit" class="bg-[#EA9010] text-white text-sm font-medium rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer dark:bg-[#EA9010] dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-            <span class="text-sm text-gray-500">Printing with: {{ json_decode($this->printer)->displayName }}</span>
+            <span class="text-xs text-gray-500">Printing with: {{ $printerDisplayName }}</span>
         </div>
 
         <div class="col-span-3 mt-2">
