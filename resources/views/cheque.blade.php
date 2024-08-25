@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cheque No. 1</title>
 </head>
-<body style=" padding: 0; margin: 0; background-color: #3f3f3f; font-size: 18px;">
-<div style="position: relative; height: 88.9mm; width: 190.5mm; color: white; border: 2px solid white; background-size: 190.5mm 88.9mm;">
-{{--<div style="position: relative; height: 88.9mm; width: 190.5mm; color: white; border: 2px solid white; background-image: url('https://s8.freechequewriter.com/image/cheque/KumariBank_NP.jpg'); background-color: blue; background-repeat: no-repeat; background-blend-mode: multiply; background-size: 190.5mm 88.9mm;">--}}
+<body style="padding: 0; margin: 0; background-color: #3f3f3f; font-size: 18px;">
+{{--<div style="position: relative; height: 88.9mm; width: 190.5mm; color: white; background-size: 190.5mm 88.9mm; border: 2px solid white;">--}}
+<div style="position: relative; height: 88.9mm; width: 190.5mm; color: white; border: 2px solid white; background-image: url('https://s8.freechequewriter.com/image/cheque/KumariBank_NP.jpg'); background-color: blue; background-repeat: no-repeat; background-blend-mode: multiply; background-size: 190.5mm 88.9mm;">
 {{--    date --}}
     <div style="position: absolute; top: calc(88.9mm - 82.55mm); left: calc(190.5mm - 53.175mm);">
         <table>
